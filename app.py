@@ -7,9 +7,9 @@ def hello():
     return "Hello World!"
 
 
-@app.route("/test")
-def test():
-    return "Test"
+@app.route('/<string:username>/<decision>')
+def show_user_profile(username, decision):
+    return 'User{0} decision: {1}'.format(username, decision)
 
 
 if __name__ == "__main__":
