@@ -2,11 +2,6 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route("/")
-def hello():
-    return "Hello World!"
-
-
 @app.route('/<string:username>/<decision>')
 def show_user_profile(username, decision):
     return 'User{0} decision: {1}'.format(username, decision)
