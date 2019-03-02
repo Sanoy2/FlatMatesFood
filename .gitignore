@@ -118,3 +118,5 @@ dmypy.json
 # My files and folders
 .vscode/
 test*
+mailconfig.json
+# config.json
