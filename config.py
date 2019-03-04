@@ -2,8 +2,8 @@ import jsonpickle
 
 class config_data:
     def __init__(self):
-        self.username = ""
-        self.password = ""
+        self.email_box_username = ""
+        self.email_box_password = ""
         self.addresses = []
 
 
