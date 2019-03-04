@@ -9,15 +9,18 @@ class config_data:
 
     @staticmethod
     def load_config(filename = "config.json"):
-        f = open(filename, "r")
-        frozen = f.read()
-        return jsonpickle.decode(frozen)
+        file = open(filename, "r")
+        frozen = file.read()
+        to_return = jsonpickle.decode(frozen)
+        file.close()
+        return to_return
 
 
     def save_config(self, filename = "config.json"):
         frozen = jsonpickle.encode(self)
-        f = open(filename, "w")
-        f.write(frozen)
+        file = open(filename, "w")
+        file.write(frozen)
+        file.close()
 
 
     def __str__(self):
