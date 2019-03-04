@@ -21,7 +21,7 @@ def save_dictionary(dictionary, filename="decisions.json"):
 
 
 def reset(filename="decisions.json"):
-    save_dictionary([])
+    save_dictionary({})
 
 
 def add_decision(email:str, decision:int, filename="decisions.json"):
