@@ -24,9 +24,11 @@ def reset(filename="decisions.json"):
     save_dictionary({})
 
 
-def add_decision(email:str, decision:int, filename="decisions.json"):
+def add_decision(email:str, decision:int, filename="decisions.json") -> bool:
     dictionary = get_dictionary()
     email = email.strip().lower()
     if not email in dictionary:
         dictionary[email] = decision
         save_dictionary(dictionary)
+        return True
+    return False
