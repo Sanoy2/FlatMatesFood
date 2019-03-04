@@ -24,8 +24,8 @@ class config_data:
 
 
     def __str__(self):
-        first_line = "username: {0}".format(self.username)
-        second_line = "password: {0}".format(self.password)
+        first_line = "username: {0}".format(self.email_box_username)
+        second_line = "password: {0}".format(self.email_box_password)
         third_line = "addresses: {0}".format(self.addresses.__str__())
         return first_line + "\n" + second_line + "\n" + third_line
 
@@ -37,4 +37,4 @@ class config_data:
 <p> password: {1} </p>
 <p> addresses: {2} </p>
 </div>
-         """.format(self.username, self.password, self.addresses)
+         """.format(self.email_box_username, self.email_box_password, self.addresses)
