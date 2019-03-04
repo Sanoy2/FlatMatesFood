@@ -33,8 +33,8 @@ class config_data:
     def print_as_html(self):
         return """
 <div>
-<p> username: {0} </p>
-<p> password: {1} </p>
+<p> email box username: {0} </p>
+<p> email box password: {1} </p>
 <p> addresses: {2} </p>
 </div>
          """.format(self.email_box_username, self.email_box_password, self.addresses)
