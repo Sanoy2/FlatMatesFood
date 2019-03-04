@@ -11,9 +11,9 @@ class config_data:
     def load_config(filename = "config.json"):
         file = open(filename, "r")
         frozen = file.read()
-        to_return = jsonpickle.decode(frozen)
+        config_data_obj = jsonpickle.decode(frozen)
         file.close()
-        return to_return
+        return config_data_obj
 
 
     def save_config(self, filename = "config.json"):
