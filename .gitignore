@@ -120,3 +120,4 @@ dmypy.json
 test*
 mailconfig.json
 # config.json
+decisions.json
