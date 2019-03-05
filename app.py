@@ -42,15 +42,26 @@ def print_server_datetime():
     return datetime.datetime.now().__str__()
     
 
-def do_something():
-    print("Doing something")
-    number = random.randint(1,100)
-    user = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(32)])
-    decisions_service.add_decision(user, number)
+def send_question_email():
+    return
+
+
+def send_summary_mail():
+    return
+
+
+def question_action():
+    decisions_service.reset()
+    send_question_email()
+
+
+def summary_action():
+    return
 
 
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=do_something, trigger="cron", minute = "45")
+scheduler.add_job(func=question_action, trigger="cron", hour = "13")
+scheduler.add_job(func=summary_action, trigger="cron", hour = "15")
 scheduler.start()
 
 atexit.register(lambda: scheduler.shutdown)
