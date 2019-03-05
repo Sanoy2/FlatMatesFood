@@ -6,6 +6,8 @@ import decisions_service
 import time
 import atexit
 import datetime
+import random
+import string
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
@@ -42,12 +44,13 @@ def print_server_datetime():
 
 def do_something():
     print("Doing something")
-    decisions_service.reset()
-    decisions_service.add_decision("krzysztof.tomkow@gmail.com", 1000)
+    number = random.randint(1,100)
+    user = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(32)])
+    decisions_service.add_decision(user, number)
 
 
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=do_something, trigger="cron", hour = "11", minute = "31")
+scheduler.add_job(func=do_something, trigger="cron", minute = "45")
 scheduler.start()
 
 atexit.register(lambda: scheduler.shutdown)
