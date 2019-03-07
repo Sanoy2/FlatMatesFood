@@ -1,11 +1,11 @@
 from flask import Flask, current_app
 from flask_mail import Mail, Message
-
-host_address = "localhost:5000"
+import config
 
 
 def create_asking_mail(user_email: str) -> Message:
     app = current_app
+    host_address = get_host()
     message = Message(subject="FlatMatesFood asking mail",
                       sender=app.config.get("MAIL_USERNAME"),
                       recipients=[user_email],
@@ -67,3 +67,8 @@ def get_html_summary(users_decisions: dict) -> str:
         html = html + line
 
     return html
+
+
+def get_host():
+    conf = config.config_data.load_config()
+    return conf.host
