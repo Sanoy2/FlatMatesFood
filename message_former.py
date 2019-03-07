@@ -16,13 +16,13 @@ def create_asking_mail(user_email: str) -> Message:
                     </h1>
                     
                     <p>
-                    <a href="http://{host}/{email}/1">
+                    <a href="{host}/{email}/1">
                         Accept
                     </a>
                     </p>
                     
                     <p>
-                    <a href="http://{host}/{email}/2">
+                    <a href="{host}/{email}/0">
                         Decline
                     </a>
                     </p>
