@@ -37,6 +37,24 @@ def register_user_decision(email, decision):
         return "User {0} decision has already been registered today".format(email)
 
 
+@app.route("/config")
+def print_config():
+    conf = config.config_data.load_config()
+    print(conf)
+    return conf.print_as_html()
+
+
+@app.route("/dict")
+def print_dictionary_with_decisions():
+    dictionary = decisions_service.get_dictionary()
+    return dictionary.__str__()
+
+
+@app.route("/datetime")
+def print_server_datetime():
+    return datetime.datetime.now().__str__()
+    
+
 def question_action():
     decisions_service.reset()
     with app.app_context():
@@ -52,8 +70,8 @@ def summary_action():
 
 
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=question_action, trigger="cron", hour="13")
-scheduler.add_job(func=summary_action, trigger="cron", hour="15")
+scheduler.add_job(func=question_action, trigger="cron", hour = "13")
+scheduler.add_job(func=summary_action, trigger="cron", hour = "15")
 scheduler.start()
 
 atexit.register(lambda: scheduler.shutdown)
