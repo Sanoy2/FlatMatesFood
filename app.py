@@ -3,6 +3,9 @@ import config
 import decisions_service
 
 
+import message_former
+import mail_sender
+
 import time
 import atexit
 import datetime
@@ -11,8 +14,18 @@ import string
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
-
+conf = config.config_data.load_config()
 app = Flask(__name__)
+mail_settings = {
+    "MAIL_SERVER": 'smtp.gmail.com',
+    "MAIL_PORT": 465,
+    "MAIL_USE_TLS": False,
+    "MAIL_USE_SSL": True,
+    "MAIL_USERNAME": conf.email_box_username,
+    "MAIL_PASSWORD": conf.email_box_password
+}
+
+app.config.update(mail_settings)
 
 
 @app.route("/<string:email>/<decision>")
@@ -40,28 +53,25 @@ def print_dictionary_with_decisions():
 @app.route("/datetime")
 def print_server_datetime():
     return datetime.datetime.now().__str__()
-    
-
-def send_question_email():
-    return
-
-
-def send_summary_mail():
-    return
 
 
 def question_action():
     decisions_service.reset()
-    send_question_email()
+    with app.app_context():
+        messages = message_former.create_list_of_asking_mails(conf.addresses)
+        mail_sender.send_many(messages)
 
 
 def summary_action():
-    return
+    with app.app_context():
+        message = message_former.create_summary_mail(
+            decisions_service.get_dictionary())
+        mail_sender.send(message)
 
 
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=question_action, trigger="cron", hour = "13")
-scheduler.add_job(func=summary_action, trigger="cron", hour = "15")
+scheduler.add_job(func=question_action, trigger="cron", hour="13")
+scheduler.add_job(func=summary_action, trigger="cron", hour="15")
 scheduler.start()
 
 atexit.register(lambda: scheduler.shutdown)

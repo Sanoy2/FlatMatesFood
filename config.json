@@ -1,1 +1,1 @@
-{"py/object": "config.config_data", "addresses": [], "email_box_password": "", "email_box_username": ""}
+{"py/object": "config.config_data", "addresses": ["first@address.com", "second@address.com"], "email_box_password": "password", "email_box_username": "address"}
