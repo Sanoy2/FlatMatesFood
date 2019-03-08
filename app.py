@@ -28,7 +28,7 @@ mail_settings = {
 app.config.update(mail_settings)
 
 
-@app.route("/<string:email>/<decision:int>")
+@app.route("/<string:email>/<decision>")
 def register_user_decision(email, decision):
     decision_saved = decisions_service.add_decision(email, decision)
     if decision_saved:
@@ -46,14 +46,13 @@ def question_action():
 
 def summary_action():
     with app.app_context():
-        message = message_former.create_summary_mail(
-            decisions_service.get_dictionary())
+        message = message_former.create_summary_mail(decisions_service.get_dictionary())
         mail_sender.send(message)
 
 
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=question_action, trigger="cron", hour = "13")
-scheduler.add_job(func=summary_action, trigger="cron", hour = "15")
+scheduler.add_job(func=question_action, trigger="cron", hour = "16", minute = "50")
+scheduler.add_job(func=summary_action, trigger="cron", hour = "17", minute = "00")
 scheduler.start()
 
 atexit.register(lambda: scheduler.shutdown)

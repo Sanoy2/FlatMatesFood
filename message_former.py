@@ -42,7 +42,7 @@ def create_summary_mail(users_decisions: dict) -> Message:
     app = current_app
     message = Message(subject="FlatMatesFood summary",
                       sender=app.config.get("MAIL_USERNAME"),
-                      recipients=[users_decisions.keys],
+                      recipients=list(users_decisions.keys()),
                       html="""
                     <div>
                     <h1>
@@ -57,9 +57,9 @@ def create_summary_mail(users_decisions: dict) -> Message:
 
 def get_html_summary(users_decisions: dict) -> str:
     html = ""
-    for user in users_decisions.keys:
+    for user in users_decisions.keys():
         decision = "?"
-        if users_decisions[user] == 1:
+        if users_decisions[user] == "1":
             decision = "I want to order food!"
         else:
             decision = "I don't want to order food :("
