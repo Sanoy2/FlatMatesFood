@@ -11,19 +11,19 @@ def create_asking_mail(user_email: str) -> Message:
                       recipients=[user_email],
                       html="""
                     <div>
-                    <h1>
-                        Hello
-                    </h1>
+                    <h2>
+                        Hey, would you like to order food today?
+                    </h2>
                     
                     <p>
-                    <a href="{host}/{email}/1">
-                        Accept
+                    <a href="{host}/{email}/1" style="padding: 15px 25px; border-radius: 10px; text-align:center;text-decoration: none;display:inline-block; color: white; background-color:#4dff4d; font-size:1.2em; min-width:10em">
+                        Oh yeah!
                     </a>
                     </p>
                     
                     <p>
-                    <a href="{host}/{email}/0">
-                        Decline
+                    <a href="{host}/{email}/0" style="padding: 15px 25px;  border-radius: 10px; text-align:center;text-decoration: none;display:inline-block; color: white; background-color:#ff4d4d; font-size:1.2em; min-width:10em">
+                        No, thanks
                     </a>
                     </p>
                     </div>""".format(host=host_address, email=user_email))
